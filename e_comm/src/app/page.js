@@ -1,11 +1,50 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './globals.css';
 
 export default function HomePage() {
-  // Form States
   const [inquiry, setInquiry] = useState({ item: '', details: '', quantity: '', unit: 'Pcs' });
   const [email, setEmail] = useState('');
+
+  const [timeLeft, setTimeLeft] = useState({
+    days: "00",
+    hours: "00",
+    minutes: "00",
+    seconds: "00"
+  });
+
+  useEffect(() => {
+    const targetTimestamp = Date.now() + 
+      (4 * 24 * 60 * 60 * 1000) + 
+      (13 * 60 * 60 * 1000) +     
+      (34 * 60 * 1000);           
+
+    const calculateCountdown = () => {
+      const difference = targetTimestamp - Date.now();
+      
+      if (difference <= 0) {
+        setTimeLeft({ days: "00", hours: "00", minutes: "00", seconds: "00" });
+        clearInterval(intervalId);
+        return;
+      }
+
+      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+      setTimeLeft({
+        days: String(d).padStart(2, '0'),
+        hours: String(h).padStart(2, '0'),
+        minutes: String(m).padStart(2, '0'),
+        seconds: String(s).padStart(2, '0')
+      });
+    };
+
+    calculateCountdown();
+    const intervalId = setInterval(calculateCountdown, 1000);
+    return () => clearInterval(intervalId); 
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,19 +62,16 @@ export default function HomePage() {
     setEmail('');
   };
 
-  // Category routing helper function
   const navigateToCategory = (catValue) => {
     window.location.href = `/products?cat=${encodeURIComponent(catValue)}`;
   };
 
-  // Authentication routing helpers
-  const handleLoginClick = () => {
-    window.location.href = '/login';
+  const navigateToProduct = (id) => {
+    window.location.href = `/products/${id}`;
   };
 
-  const handleJoinClick = () => {
-    window.location.href = '/signup';
-  };
+  const handleLoginClick = () => { window.location.href = '/login'; };
+  const handleJoinClick = () => { window.location.href = '/signup'; };
 
   const products = [
     { id: 1, title: "T-Shirt with multiple colors for men", price: "$10.30", image: "/images/tshirt.svg" },
@@ -51,33 +87,33 @@ export default function HomePage() {
   ];
 
   const dealItems = [
-    { id: 1, name: "Smart watches", discount: "-25%", image: "/images/watch.svg" },
-    { id: 2, name: "Laptops", discount: "-15%", image: "/images/laptop.svg" },
-    { id: 3, name: "GoPro cameras", discount: "-40%", image: "/images/camera.svg" },
-    { id: 4, name: "Headphones", discount: "-25%", image: "/images/headphones.svg" },
-    { id: 5, name: "Canon cameras", discount: "-25%", image: "/images/canon.svg" },
+    { id: 11, name: "Smart watches", discount: "-25%", image: "/images/watch.svg" },
+    { id: 12, name: "Laptops", discount: "-15%", image: "/images/laptop.svg" },
+    { id: 13, name: "GoPro cameras", discount: "-40%", image: "/images/camera.svg" },
+    { id: 14, name: "Headphones", discount: "-25%", image: "/images/headphones.svg" },
+    { id: 15, name: "Canon cameras", discount: "-25%", image: "/images/canon.svg" },
   ];
 
   const homeCategoryItems = [
-    { id: 1, title: "Soft chairs", price: "USD 19", image: "/images/sofa.svg" },
-    { id: 2, title: "Sofa & chair", price: "USD 19", image: "/images/lamp.svg" },
-    { id: 3, title: "Kitchen dishes", price: "USD 19", image: "/images/kdishes.svg" },
-    { id: 4, title: "Smart watches", price: "USD 19", image: "/images/pot.png" },
-    { id: 5, title: "Kitchen mixer", price: "USD 100", image: "/images/mixer.svg" },
-    { id: 6, title: "Blenders", price: "USD 39", image: "/images/blender.svg" },
-    { id: 7, title: "Home appliance", price: "USD 19", image: "/images/appliance.png" },
-    { id: 8, title: "Coffee maker", price: "USD 10", image: "/images/plant.png" },
+    { id: 16, title: "Soft chairs", price: "USD 19", image: "/images/sofa.svg" },
+    { id: 17, title: "Lamps", price: "USD 19", image: "/images/lamp.svg" },
+    { id: 18, title: "Kitchen dishes", price: "USD 19", image: "/images/kdishes.svg" },
+    { id: 19, title: "Smart watches", price: "USD 19", image: "/images/watch.svg" }, 
+    { id: 20, title: "Kitchen mixer", price: "USD 100", image: "/images/mixer.svg" },
+    { id: 21, title: "Blenders", price: "USD 39", image: "/images/blender.svg" },
+    { id: 22, title: "Home appliance", price: "USD 19", image: "/images/appliance.png" },
+    { id: 23, title: "Coffee maker", price: "USD 10", image: "/images/plant.png" },
   ];
 
   const electronicsItems = [
-    { id: 1, title: "Smart watches", price: "USD 19", image: "/images/watch.svg" },
-    { id: 2, title: "Cameras", price: "USD 89", image: "/images/camera.svg" },
-    { id: 3, title: "Headphones", price: "USD 10", image: "/images/headphones2.svg" },
-    { id: 4, title: "Smart watches", price: "USD 90", image: "/images/watch.svg" },
-    { id: 5, title: "Gaming set", price: "USD 35", image: "/images/headphones.svg" },
-    { id: 6, title: "Laptops & PC", price: "USD 340", image: "/images/laptop.svg" },
-    { id: 7, title: "Smartphones", price: "USD 19", image: "/images/sphone.svg" },
-    { id: 8, title: "Electric kettle", price: "USD 240", image: "/images/ekettle.svg" },
+    { id: 24, title: "Smart watches", price: "USD 19", image: "/images/watch.svg" },
+    { id: 25, title: "Cameras", price: "USD 89", image: "/images/camera.svg" },
+    { id: 26, title: "Headphones", price: "USD 10", image: "/images/headphones2.svg" },
+    { id: 27, title: "Smart watches", price: "USD 90", image: "/images/watch.svg" },
+    { id: 28, title: "Gaming set", price: "USD 35", image: "/images/headphones.svg" },
+    { id: 29, title: "Laptops & PC", price: "USD 340", image: "/images/laptop.svg" },
+    { id: 30, title: "Smartphones", price: "USD 19", image: "/images/sphone.svg" },
+    { id: 31, title: "Electric kettle", price: "USD 240", image: "/images/ekettle.svg" },
   ];
 
   const regions = [
@@ -137,7 +173,6 @@ export default function HomePage() {
               </div>
               <p className="greeting-text">Hi, user <br /><span>let's get started</span></p>
             </div>
-            {/* Functional auth routing hooks */}
             <button className="auth-btn join-btn" onClick={handleJoinClick}>Join now</button>
             <button className="auth-btn login-btn" onClick={handleLoginClick}>Log in</button>
           </div>
@@ -154,15 +189,15 @@ export default function HomePage() {
             <p>Hygiene equipments</p>
           </div>
           <div className="countdown-timer">
-            <div className="timer-unit"><strong>04</strong><span>Days</span></div>
-            <div className="timer-unit"><strong>13</strong><span>Hour</span></div>
-            <div className="timer-unit"><strong>34</strong><span>Min</span></div>
-            <div className="timer-unit"><strong>56</strong><span>Sec</span></div>
+            <div className="timer-unit"><strong>{timeLeft.days}</strong><span>Days</span></div>
+            <div className="timer-unit"><strong>{timeLeft.hours}</strong><span>Hour</span></div>
+            <div className="timer-unit"><strong>{timeLeft.minutes}</strong><span>Min</span></div>
+            <div className="timer-unit"><strong>{timeLeft.seconds}</strong><span>Sec</span></div>
           </div>
         </div>
         <div className="deals-items-grid">
           {dealItems.map((item) => (
-            <div key={item.id} className="deal-card" style={{ cursor: 'pointer' }} onClick={() => navigateToCategory('tech')}>
+            <div key={item.id} className="deal-card" style={{ cursor: 'pointer' }} onClick={() => navigateToProduct(item.id)}>
               <div className="deal-img-wrap">
                 <img src={item.image} alt={item.name} onError={(e) => e.currentTarget.style.display = 'none'} />
                 <div className="img-fallback">📦</div>
@@ -184,7 +219,7 @@ export default function HomePage() {
         </div>
         <div className="category-grid-container">
           {homeCategoryItems.map((item) => (
-            <div key={item.id} className="category-item-card" style={{ cursor: 'pointer' }} onClick={() => navigateToCategory('home')}>
+            <div key={item.id} className="category-item-card" style={{ cursor: 'pointer' }} onClick={() => navigateToProduct(item.id)}>
               <div className="item-card-details">
                 <h4>{item.title}</h4>
                 <p>From <br /><span>{item.price}</span></p>
@@ -208,7 +243,7 @@ export default function HomePage() {
         </div>
         <div className="category-grid-container">
           {electronicsItems.map((item) => (
-            <div key={item.id} className="category-item-card" style={{ cursor: 'pointer' }} onClick={() => navigateToCategory('tech')}>
+            <div key={item.id} className="category-item-card" style={{ cursor: 'pointer' }} onClick={() => navigateToProduct(item.id)}>
               <div className="item-card-details">
                 <h4>{item.title}</h4>
                 <p>From <br /><span>{item.price}</span></p>
@@ -257,7 +292,7 @@ export default function HomePage() {
         <h2 className="section-title">Recommended items</h2>
         <div className="product-grid">
           {products.map((product) => (
-            <div key={product.id} className="product-card">
+            <div key={product.id} className="product-card" style={{ cursor: 'pointer' }} onClick={() => navigateToProduct(product.id)}>
               <div className="product-img-wrapper">
                 <img src={product.image} alt={product.title} onError={(e) => e.currentTarget.style.display = 'none'} />
                 <div className="image-placeholder">📦</div>

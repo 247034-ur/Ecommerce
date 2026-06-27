@@ -1,13 +1,13 @@
 import './globals.css';
 import ShippingDropdown from './shippingDropdown';
-import SearchForm from './searchForm'; // Imported client-side module
+import SearchForm from './searchForm'; 
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
         
-        {/* --- 1. MAIN GLOBAL MARKETPLACE HEADER --- */}
+        {/* 1. MAIN GLOBAL MARKETPLACE HEADER */}
         <header className="site-header">
           
           <div className="logo-container">
@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
 
         </header>
 
-        {/* --- 2. SECONDARY SUB-NAVBAR LINK STRIP --- */}
+        {/* 2. SECONDARY SUB-NAVBAR LINK STRIP  */}
         <nav className="sub-navbar">
           
           <div className="sub-nav-left">
@@ -77,12 +77,12 @@ export default function RootLayout({ children }) {
           </div>
         </nav>
 
-        {/* --- 3. CORE PAGE CHANNELS HUB --- */}
+        {/* 3. CORE PAGE CHANNELS HUB */}
         <main className="main-content-wrapper">
           {children}
         </main>
 
-        {/* --- 4. GLOBAL SITE FOOTER --- */}
+        {/* 4. GLOBAL SITE FOOTER */}
         <footer className="site-footer">
           <div className="footer-top">
             

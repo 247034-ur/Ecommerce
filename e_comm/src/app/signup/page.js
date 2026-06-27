@@ -33,12 +33,8 @@ export default function SignUpPage() {
           <div>
             <label style={{ display: 'block', fontSize: '14px', color: '#505050', marginBottom: '6px', fontWeight: '500' }}>Full Name</label>
             <input 
-              type="text" 
-              name="fullName"
-              required
-              placeholder="John Doe" 
-              value={formData.fullName}
-              onChange={handleChange}
+              type="text" name="fullName" required placeholder="John Doe" 
+              value={formData.fullName} onChange={handleChange}
               style={{ width: '100%', padding: '10px 12px', border: '1px solid #e3e8ee', borderRadius: '5px', fontSize: '15px', boxSizing: 'border-box' }}
             />
           </div>
@@ -46,12 +42,8 @@ export default function SignUpPage() {
           <div>
             <label style={{ display: 'block', fontSize: '14px', color: '#505050', marginBottom: '6px', fontWeight: '500' }}>Email Address</label>
             <input 
-              type="email" 
-              name="email"
-              required
-              placeholder="name@company.com" 
-              value={formData.email}
-              onChange={handleChange}
+              type="email"  name="email" required  placeholder="name@company.com" 
+              value={formData.email} onChange={handleChange}
               style={{ width: '100%', padding: '10px 12px', border: '1px solid #e3e8ee', borderRadius: '5px', fontSize: '15px', boxSizing: 'border-box' }}
             />
           </div>
@@ -59,11 +51,8 @@ export default function SignUpPage() {
           <div>
             <label style={{ display: 'block', fontSize: '14px', color: '#505050', marginBottom: '6px', fontWeight: '500' }}>Password</label>
             <input 
-              type="password" 
-              name="password"
-              required
-              placeholder="Minimum 6 characters" 
-              value={formData.password}
+              type="password"  name="password" required
+              placeholder="Minimum 6 characters"  value={formData.password}
               onChange={handleChange}
               style={{ width: '100%', padding: '10px 12px', border: '1px solid #e3e8ee', borderRadius: '5px', fontSize: '15px', boxSizing: 'border-box' }}
             />
@@ -71,10 +60,8 @@ export default function SignUpPage() {
 
           <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '14px', color: '#505050', cursor: 'pointer', marginTop: '4px', lineHeight: '1.4' }}>
             <input 
-              type="checkbox" 
-              name="terms"
-              checked={formData.terms}
-              onChange={handleChange}
+              type="checkbox"  name="terms"
+              checked={formData.terms} onChange={handleChange}
               style={{ width: '18px', height: '18px', accentColor: '#0d6efd', marginTop: '2px', flexShrink: 0 }} 
             />
             <span>I agree with the user <a href="#" style={{ color: '#0d6efd', textDecoration: 'none' }}>Terms &amp; User Policy Condition Agreements</a>.</span>

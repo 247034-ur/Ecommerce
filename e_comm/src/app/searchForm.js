@@ -8,24 +8,18 @@ export default function SearchForm() {
     e.preventDefault();
     const query = e.target.elements.searchInput.value;
     
-    // Maps both search input and dropdown category query values to the URL string
     window.location.href = `/products?search=${encodeURIComponent(query)}&cat=${encodeURIComponent(category)}`;
   };
 
   return (
     <form className="search-container" onSubmit={handleSearchSubmit}>
       <input 
-        type="text" 
-        name="searchInput"
-        placeholder="Search" 
-        className="search-input" 
+        type="text"  name="searchInput" placeholder="Search"  className="search-input" 
       />
       
       <div className="category-dropdown">
         <select 
-          className="header-select" 
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          className="header-select"  value={category} onChange={(e) => setCategory(e.target.value)}
         >
           <option value="all">All category</option>
           {/* These values map directly to our products data structure */}

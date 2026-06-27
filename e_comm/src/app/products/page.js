@@ -38,7 +38,7 @@ export default function ProductListingPage() {
         } else if (normalizedParam === "home" || normalizedParam === "home interiors") {
           setSelectedCategory("Home interiors");
         }
-        setSelectedBrands([]);
+        setSelectedBrands([]); 
       }
     }
   }, []);
@@ -51,11 +51,7 @@ export default function ProductListingPage() {
     }
   };
 
-  const handleBuyNow = (product) => {
-    alert(`Proceeding to checkout for:\n${product.title}\nTotal: $${product.price.toFixed(2)}`);
-    // Real implementation would route to a /checkout or cart state here
-  };
-
+  // Filtering engine 
   const filteredProducts = useMemo(() => {
     return productsData
       .filter(product => {
@@ -78,6 +74,7 @@ export default function ProductListingPage() {
   return (
     <div style={{ backgroundColor: '#f7fafc', minHeight: '100vh', paddingBottom: '40px', fontFamily: 'sans-serif' }}>
       
+      {/* Active Filter Strip Indicator banner */}
       {(searchQuery || selectedCategory !== "All") && (
         <div style={{ background: '#e1f0ff', padding: '12px 20px', textAlign: 'center', fontSize: '14px', color: '#0d6efd', borderBottom: '1px solid #ccd8e5' }}>
           Active Filters: {searchQuery && <span>Search: <strong>"{searchQuery}"</strong></span>} 
@@ -96,13 +93,14 @@ export default function ProductListingPage() {
         </div>
       )}
 
+      {/* Catalog Breadcrumbs */}
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '15px 20px', color: '#8b96a5', fontSize: '14px' }}>
         Home &gt; Catalog &gt; <span style={{ color: '#505050' }}>{selectedCategory}</span>
       </div>
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', display: 'flex', gap: '24px' }}>
         
-        {/* SIDEBAR */}
+        {/* SIDEBAR BLOCK */}
         <aside style={{ width: '240px', flexShrink: 0 }}>
           <div style={{ borderTop: '1px solid #e3e8ee', padding: '14px 0' }}>
             <h4 style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 12px 0', fontSize: '16px', color: '#1c1c1c' }}>Category ^</h4>
@@ -131,7 +129,7 @@ export default function ProductListingPage() {
           </div>
         </aside>
 
-        {/* MAIN CATALOG DISPLAY */}
+        {/* PRODUCTS MAIN LISTING GRID FEED */}
         <main style={{ flexGrow: 1 }}>
           <div style={{ backgroundColor: '#ffffff', border: '1px solid #e3e8ee', borderRadius: '6px', padding: '10px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <div style={{ fontSize: '15px', color: '#1c1c1c' }}>
@@ -149,11 +147,17 @@ export default function ProductListingPage() {
             </div>
           </div>
 
-          {/* GRID VIEW CONTAINER */}
+          {/* THE GRID VIEW */}
           {filteredProducts.length > 0 ? (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px' }}>
               {filteredProducts.map((product) => (
-                <div key={product.id} style={{ backgroundColor: '#ffffff', border: '1px solid #e3e8ee', borderRadius: '6px', padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div 
+                  key={product.id} 
+                  onClick={() => window.location.href = `/products/${product.id}`} 
+                  style={{ backgroundColor: '#ffffff', border: '1px solid #e3e8ee', borderRadius: '6px', padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', cursor: 'pointer', transition: 'box-shadow 0.2s' }}
+                  onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0px 4px 12px rgba(0,0,0,0.05)'}
+                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
+                >
                   <div>
                     <div style={{ height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px', backgroundColor: '#fafafa', borderRadius: '4px' }}>
                       <img src={product.image} alt={product.title} style={{ maxWidth: '85%', maxHeight: '85%', objectFit: 'contain' }} />
@@ -169,23 +173,17 @@ export default function ProductListingPage() {
                     </p>
                   </div>
 
-                  {/* ➕ ADDED: BUY NOW BUTTON */}
                   <button 
-                    onClick={() => handleBuyNow(product)}
-                    style={{ 
-                      width: '100%', 
-                      backgroundColor: '#0d6efd', 
-                      color: '#ffffff', 
-                      border: 'none', 
-                      padding: '8px 12px', 
-                      borderRadius: '5px', 
-                      fontSize: '14px', 
-                      fontWeight: '500', 
-                      cursor: 'pointer',
-                      transition: 'background-color 0.2s ease'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      alert(`Proceeding to instant checkout process for:\n${product.title}\nTotal: $${product.price.toFixed(2)}`);
                     }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#0052cc'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = '#0d6efd'}
+                    style={{ 
+                      width: '100%', backgroundColor: '#0d6efd', 
+                      color: '#ffffff',  border: 'none',  padding: '8px 12px', 
+                      borderRadius: '5px',  fontSize: '14px', 
+                      fontWeight: '500', cursor: 'pointer'
+                    }}
                   >
                     Buy Now
                   </button>

@@ -34,33 +34,20 @@ export default function ShippingDropdown() {
         type="button"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '6px 10px',
-          fontSize: '14px',
-          color: '#1c1c1c',
-          fontFamily: 'inherit'
+          background: 'none', border: 'none', cursor: 'pointer', display: 'flex',
+          alignItems: 'center', gap: '8px', padding: '6px 10px', fontSize: '14px',
+          color: '#1c1c1c', fontFamily: 'inherit'
         }}
       >
         <span>Ship to</span>
         {/* Dynamic Image Wrapper Container */}
         <div style={{
-          width: '24px',
-          height: '16px',
-          borderRadius: '2px',
-          overflow: 'hidden',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
+          width: '24px', height: '16px', borderRadius: '2px',
+          overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center'
         }}>
           <img 
-            src={selectedCountry.flag} 
-            alt={selectedCountry.name} 
+            src={selectedCountry.flag}  alt={selectedCountry.name} 
             style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
           />
         </div>
@@ -70,19 +57,11 @@ export default function ShippingDropdown() {
       {/* Floating interactive dropdown menu container */}
       {dropdownOpen && (
         <ul style={{
-          position: 'absolute',
-          top: '100%',
-          right: 0,
-          marginTop: '6px',
-          backgroundColor: '#ffffff',
-          border: '1px solid #e3e8ee',
-          borderRadius: '6px',
-          boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
-          listStyle: 'none',
-          padding: '6px 0',
-          width: '200px',
-          zIndex: 99999,
-          margin: 0
+          position: 'absolute', top: '100%', right: 0, marginTop: '6px',
+          backgroundColor: '#ffffff', border: '1px solid #e3e8ee',
+          borderRadius: '6px', boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+          listStyle: 'none', padding: '6px 0',
+          width: '200px', zIndex: 99999, margin: 0
         }}>
           {countries.map((country) => (
             <li key={country.code} style={{ width: '100%' }}>
@@ -90,34 +69,21 @@ export default function ShippingDropdown() {
                 type="button"
                 onClick={() => handleSelectCountry(country)}
                 style={{
-                  width: '100%',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  padding: '8px 14px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  color: '#1c1c1c',
-                  fontFamily: 'inherit'
+                  width: '100%', background: 'none', border: 'none',
+                  textAlign: 'left', padding: '8px 14px', display: 'flex',
+                  alignItems: 'center', gap: '10px', cursor: 'pointer',
+                  fontSize: '14px', color: '#1c1c1c', fontFamily: 'inherit'
                 }}
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f1f7ff'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
               >
                 <div style={{
-                  width: '22px',
-                  height: '15px',
-                  borderRadius: '2px',
-                  overflow: 'hidden',
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.15)',
-                  display: 'flex',
-                  alignItems: 'center'
+                  width: '22px', height: '15px', borderRadius: '2px',
+                  overflow: 'hidden', boxShadow: '0 1px 2px rgba(0,0,0,0.15)', 
+                  display: 'flex', alignItems: 'center'
                 }}>
                   <img 
-                    src={country.flag} 
-                    alt="" 
+                    src={country.flag}  alt="" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                   />
                 </div>
